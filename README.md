@@ -1,7 +1,7 @@
 # Killable sudo
 A wrapper around sudo which allows you to kill a process run with sudo as a normal user.
 
-This is really intended for a [limited set of commands run as sudo](https://unix.stackexchange.com/questions/215412/allow-certain-guests-to-execute-certain-commands) rather than 'full root" access - since a user with full root access can kill processes with `sudo kill`.
+This is really intended for a [limited set of commands run as sudo without a password](https://unix.stackexchange.com/questions/215412/allow-certain-guests-to-execute-certain-commands) rather than 'full root" access - since a user with full root access via sudo can kill processes with `sudo kill`. My personal motivation was running processes started by a service manager not running as root.
 
 It is also to be noted that similar effects can be achieved with [progress groups](https://www.andy-pearce.com/blog/posts/2013/Aug/process-groups-and-sessions/), which is the feature which allows `Ctrl-C` to kill process run with `sudo`. You can kill a process group by using kill with negative integers.
 

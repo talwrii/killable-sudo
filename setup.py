@@ -6,10 +6,10 @@ def read(fname):
 
 setup(
     name="killable-sudo",
-    version="0.1.0",
+    version="1.0.0",
     author="Your Name",
-    author_email="your.email@example.com",
-    description="Wrapper around sudo allowing killing of processes run with sudo",
+    author_email="talwrii@gmail.com",
+    description="Wrapper around sudo which can be killed by the user who spawned the process.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     url="https://github.com/yourname/killable-sudo",
