@@ -6,13 +6,13 @@ def read(fname):
 
 setup(
     name="killable-sudo",
-    version="1.0.0",
-    author="Your Name",
+    version="1.0.1",
+    author="@readwithai",
     author_email="talwrii@gmail.com",
     description="Wrapper around sudo which can be killed by the user who spawned the process.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourname/killable-sudo",
+    url="https://github.com/talwrii/killable-sudo",
     packages=find_packages(),
     entry_points={
         "console_scripts": [
