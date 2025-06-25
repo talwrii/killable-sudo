@@ -1,0 +1,2 @@
+include README.md
+include killable_sudo/root_script.py
