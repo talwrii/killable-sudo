@@ -111,9 +111,10 @@ def run_user_shim(args):
 
     if fifo_path.exists():
         fifo_path.unlink()
-    os.mkfifo(fifo_path, mode=0o600)
 
     user_init_fifo_dir()
+    os.mkfifo(fifo_path, mode=0o600)
+
 
     # Now run the actual command passed as args
     if not args:

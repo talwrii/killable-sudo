@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name="killable-sudo",
-    version="1.0.1",
+    version="1.0.2",
     author="@readwithai",
     author_email="talwrii@gmail.com",
     description="Wrapper around sudo which can be killed by the user who spawned the process.",
