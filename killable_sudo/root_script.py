@@ -2,7 +2,6 @@
 import argparse
 import os
 import sys
-import json
 import pwd
 import logging
 import subprocess
@@ -25,11 +24,11 @@ def ensure_dir(path: Path, mode=0o750, owner_uid=0, owner_gid=0):
     os.chown(path, owner_uid, owner_gid)
 
 def init_fifodir(username: str):
-    logging.debug(f"Initializing FIFO directory for user {username}")
+    logging.debug("Initializing FIFO directory for user %s", username)
     try:
         user_info = pwd.getpwnam(username)
     except KeyError:
-        logging.error(f"User {username} not found")
+        logging.error("User %s not found", username)
         return 1
 
     user_dir = BASE_RUN_DIR / f"user-{username}"
@@ -46,14 +45,14 @@ def kill_pid_from_fifo(fifo_path: Path):
         pid_str = fifo_path.name.split("pid-")[-1].split(".fifo")[0]
         pid = int(pid_str)
     except Exception as e:
-        logging.error(f"Invalid fifo filename {fifo_path}: {e}")
+        logging.error("Invalid fifo filename %s: %s", fifo_path, e)
         return 1
 
-    logging.debug(f"Sending SIGTERM to PID {pid} for fifo {fifo_path}")
+    logging.debug("Sending SIGTERM to PID %s for fifo %s", pid, fifo_path)
     try:
         os.kill(pid, signal.SIGTERM)
     except ProcessLookupError:
-        logging.warning(f"PID {pid} does not exist")
+        logging.warning("PID %s does not exist", pid)
         return 1
     return 0
 
@@ -129,6 +128,7 @@ def run_user_shim(args):
 
     # Signal handler for SIGINT, SIGTERM to forward kill to root shim
     def sig_handler(signum, frame):
+        del signum, frame
         forward_kill(fifo_path)
 
     signal.signal(signal.SIGINT, sig_handler)
@@ -154,7 +154,7 @@ def run_user_command(args, fifo_path):
         "--command", " ".join(shlex.quote(arg) for arg in args)
     ]
 
-    result = subprocess.run(cmd)
+    result = subprocess.run(cmd, check=True)
     return result.returncode
 
 
@@ -220,7 +220,6 @@ def run_command_and_watch_fifo(fifo_path: Path, cmd: list):
 def proc_owner(fifo_path: Path) -> str:
     # Helper to get username from fifo ownership
     st = fifo_path.stat()
-    import pwd
     return pwd.getpwuid(st.st_uid).pw_name
 
 def main():
@@ -254,8 +253,8 @@ def parse_root_arguments():
     root_action_group = root_parser.add_mutually_exclusive_group(required=True)
 
     root_action_group.add_argument(
-        "--init-fifodir", 
-        metavar="USERNAME", 
+        "--init-fifodir",
+        metavar="USERNAME",
         help="Initialize FIFO directory for a given username."
     )
 
@@ -265,12 +264,12 @@ def parse_root_arguments():
     )
 
     root_action_group.add_argument(
-        "--kill", 
+        "--kill",
         action='store_true',
         default=False,
     )
     return root_parser.parse_args()
-        
+
 
 if __name__ == "__main__":
     main()
