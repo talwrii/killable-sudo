@@ -1,4 +1,7 @@
 # Killable sudo
+**@readwithai** - [X](https://x.com/readwithai) - [blog](https://readwithai.substack.com/) - [machine-aided reading](https://www.reddit.com/r/machineAidedReading/) - [📖](https://readwithai.substack.com/p/what-is-reading-broadly-defined
+)[⚡️](https://readwithai.substack.com/s/technical-miscellany)[🖋️](https://readwithai.substack.com/p/note-taking-with-obsidian-much-of)
+
 A wrapper around sudo which allows you to kill a process run with sudo as a normal user.
 
 This is really intended for a [limited set of commands run as sudo without a password](https://unix.stackexchange.com/questions/215412/allow-certain-guests-to-execute-certain-commands) rather than 'full root" access - since a user with full root access via sudo can kill processes with `sudo kill`. My personal motivation was running processes started by a service manager not running as root.
