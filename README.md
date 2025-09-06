@@ -8,6 +8,8 @@ This is really intended for a [limited set of commands run as sudo without a pas
 
 It is also to be noted that similar effects can be achieved with [progress groups](https://www.andy-pearce.com/blog/posts/2013/Aug/process-groups-and-sessions/), which is the feature which allows `Ctrl-C` to kill process run with `sudo`. You can kill a process group by using kill with negative integers.
 
+![logo](./logo.png)
+
 ## Motivation
 I was setting up a little router on a box which combines together a few services and a little glue. Naturally, as a router some of the things want to run as root,  but I didn't feel like running everything is a root. So I fell back to using sudo to provide access to a limited set of processes. `sudo` gives you nice fine-grained control over the commands that a user can run and is a nice alternative to setuid and can limit access to certain users so it seems a nice approach.
 
